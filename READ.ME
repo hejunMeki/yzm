@@ -1,0 +1,18 @@
+项目介绍：这是一个通过算法解析验证码的工具
+针对不同的验证码，需要调配一些参数生成对应的子模，使通过率达到90%以上
+测试主方法：com.myfams.ImageProcessUtil
+修改点如下：
+
+1、com.myfams.ImageProcessUtil.train()的 grayDeal(bf, 150);   灰度处理
+2、com.myfams.ImageProcessUtil.process()grayDeal(file, 150);     灰度处理
+3、与此同时，一下几点也要根据情况来
+ BufferedImage file = ImageIO.read(srcFile);
+        //BufferedImage file=rotateImg(srcImg,25,newColor); 	//旋转25度
+        grayDeal(file, 150);                                //灰度处理
+//        cleanImage(file,file.getHeight(),file.getWidth());//去除干扰线
+        //separate(file,file.getHeight(),file.getWidth());//分割图片
+        removeNoise(file, 1);   //去掉噪点
+4、确定Get还是Post请求
+    com.myfams.ImageProcessUtil.saveCheckCodeImg();
+    HttpPost post = new HttpPost(checkCodeUrltemp);
+    HttpGet post= new HttpGet(checkCodeUrltemp);
